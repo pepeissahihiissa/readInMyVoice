@@ -1,0 +1,2 @@
+# バッチファイルはShift-JIS/CRLFのまま保存する（GitのUTF-8変換を防ぐ）
+*.bat -text working-tree-encoding=CP932
