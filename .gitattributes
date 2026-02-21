@@ -1,2 +1,5 @@
 # バッチファイルはShift-JIS/CRLFのまま保存する（GitのUTF-8変換を防ぐ）
-*.bat -text working-tree-encoding=CP932
+*.bat  -text working-tree-encoding=CP932
+
+# PowerShellスクリプトはUTF-8/CRLFで保存する
+*.ps1  text eol=crlf
