@@ -4,6 +4,8 @@ param(
     [string]$BaseDir = $PSScriptRoot
 )
 
+# %~dp0は末尾に \" が付くため、" を先に、次に \ をトリムする
+$BaseDir = $BaseDir.TrimEnd('"').TrimEnd('\')
 $sbv2Dir = Join-Path $BaseDir "Style-Bert-VITS2"
 
 # --- 1. requirements.txt ---
@@ -28,12 +30,16 @@ $c = $c -replace 'parser\.add_argument\("--device", type=str, default="cuda"\)',
 [System.IO.File]::WriteAllLines($transcribeFile, $c)
 Write-Host "transcribe.py patched."
 
-# --- 3. cloud_io.py (weights_only=False for PyTorch 2.6+) ---
-Write-Host "Patching cloud_io.py..."
+# --- 3. cloud_io.py (venv構築後のみ実行、weights_only=False for PyTorch 2.6+) ---
 $cloudIoFile = Join-Path $sbv2Dir "venv\Lib\site-packages\lightning_fabric\utilities\cloud_io.py"
-$c = Get-Content $cloudIoFile -Encoding utf8
-$c = $c -replace 'weights_only=weights_only', 'weights_only=False'
-[System.IO.File]::WriteAllLines($cloudIoFile, $c)
-Write-Host "cloud_io.py patched."
+if (Test-Path $cloudIoFile) {
+    Write-Host "Patching cloud_io.py..."
+    $c = Get-Content $cloudIoFile -Encoding utf8
+    $c = $c -replace 'weights_only=weights_only', 'weights_only=False'
+    [System.IO.File]::WriteAllLines($cloudIoFile, $c)
+    Write-Host "cloud_io.py patched."
+} else {
+    Write-Host "cloud_io.py not found, skipping (will be patched after venv is built)."
+}
 
 Write-Host "All patches applied."

@@ -111,7 +111,7 @@ python initialize.py
 echo ----------------------------------------
 echo Model download is complete. Start Style-Bert-VITS2 App.
 echo ----------------------------------------
-python app.py --inbrowser
+python app.py
 pause
 
 popd
