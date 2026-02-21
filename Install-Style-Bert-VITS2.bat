@@ -1,23 +1,23 @@
 chcp 65001 > NUL
 @echo off
 
-@REM ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ã‚’é…å»¶è©•ä¾¡ã™ã‚‹ãŸã‚ã«è¨­å®š
+@REM ƒGƒ‰[ƒR[ƒh‚ğ’x‰„•]‰¿‚·‚é‚½‚ß‚Éİ’è
 setlocal enabledelayedexpansion
 
-@REM PowerShellã®ã‚³ãƒãƒ³ãƒ‰
+@REM PowerShell‚ÌƒRƒ}ƒ“ƒh
 set PS_CMD=PowerShell -Version 5.1 -ExecutionPolicy Bypass
 
-@REM PortableGitã®URLã¨ä¿å­˜å…ˆ
+@REM PortableGit‚ÌURL‚Æ•Û‘¶æ
 set DL_URL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
 set DL_DST=%~dp0lib\PortableGit-2.44.0-64-bit.7z.exe
 
-@REM Style-Bert-VITS2ã®ãƒªãƒã‚¸ãƒˆãƒªURL
+@REM Style-Bert-VITS2‚ÌƒŠƒ|ƒWƒgƒŠURL
 set REPO_URL=https://github.com/litagin02/Style-Bert-VITS2
 
-@REM ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’batãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«å¤‰æ›´
+@REM ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğbatƒtƒ@ƒCƒ‹‚ÌƒfƒBƒŒƒNƒgƒŠ‚É•ÏX
 pushd %~dp0
 
-@REM lib ãƒ•ã‚©ãƒ«ãƒ€ãŒãªã‘ã‚Œã°ä½œæˆ
+@REM lib ƒtƒHƒ‹ƒ_‚ª‚È‚¯‚ê‚Îì¬
 if not exist lib\ ( mkdir lib )
 
 echo --------------------------------------------------
@@ -66,7 +66,7 @@ echo --------------------------------------------------
 powershell -Command "$c = (Get-Content 'Style-Bert-VITS2\requirements.txt' -Encoding utf8); $c = $c -replace 'faster-whisper==0\.10\.1', 'faster-whisper>=1.0.0'; $c = $c -replace '^transformers$', 'transformers>=4.34.0,<5.0.0'; $c = $c -replace '^transformers[^><=!].*$', 'transformers>=4.34.0,<5.0.0'; $c = $c -replace '^torch<.*$', 'torch>=2.4,<3.0'; $c = $c -replace '^torchaudio<.*$', 'torchaudio>=2.4,<3.0'; $c = $c -replace '^librosa==0\.9\.2$', 'librosa>=0.10.0'; $c = $c -replace '^pyopenjtalk$', '# pyopenjtalk installed separately as prebuilt'; [System.IO.File]::WriteAllLines('Style-Bert-VITS2\requirements.txt', $c)"
 echo Patching complete.
 
-@REM Pythonã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
+@REM Python‚ÌƒZƒbƒgƒAƒbƒv
 echo --------------------------------------------------
 echo Setting up Python environment...
 echo --------------------------------------------------
